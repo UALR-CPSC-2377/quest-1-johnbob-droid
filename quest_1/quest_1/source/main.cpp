@@ -1,4 +1,3 @@
-
 #include <cstdlib>
 #include <ctime>
 #include <string>
@@ -19,7 +18,7 @@ int main (int argc, char *argv[]){
 	Object objects[maxObjects];
 
 	//Initialize the game's data source
-	string gameFile ("./Assets/Config/game.txt");
+	string gameFile ("./assets/Config/game.txt"); //("./Assets/Config/game.txt");
 
 	//Task 2: Load block structure from a file
     int numObjects = loadBlockData(gameFile, objects, gui);

@@ -1,4 +1,3 @@
-
 #include "engine.h"
 
 // stdlib
@@ -15,6 +14,54 @@ loadBlockData (
     Object p_objects[],
     const GUI& p_gui
 ) {
+    std::ifstream inFile;
+    inFile.open("p_gameFile");
+    int x{ NULL };
+    while (inFile >> x && !inFile.eof()) {
+        if (!inFile) {
+            std::cerr << "Unable to open file at " << p_gameFile;
+            exit(1);
+        }
+        for (int i{ 0 }; i <= 21; i++) {
+            for (int j{ 0 }; j <= 13; j++) {
+                p_objects[x].position = { i, j };
+                switch (x) {
+                case 0:
+                    p_objects[x].type = Type::none;
+                    break;
+                case 1:
+                    p_objects[x].type = Type::block;
+                    break;
+                case 2:
+                    p_objects[x].type = Type::belowBlock;
+                    break;
+                case 3:
+                    p_objects[x].type = Type::belowBlock2;
+                    break;
+                case 4:
+                    p_objects[x].type = Type::wall1;
+                    break;
+                case 5:
+                    p_objects[x].type = Type::wall2;
+                    break;
+                case 6:
+                    p_objects[x].type = Type::waterSurface;
+                    break;
+                case 7:
+                    p_objects[x].type = Type::water;
+                    break;
+                case 8:
+                    p_objects[x].type = Type::player;
+                    break;
+                case 9:
+                    p_objects[x].type = Type::numTypes;
+                    break;
+                }
+            }
+        }
+    }
+    inFile.close();
+    return x;
     /*
         -- loadBlockData   --
         Parameters:
@@ -29,8 +76,6 @@ loadBlockData (
         loadBlockData will read the p_gameFile and update the objects in
         p_objects with the appropriate data.
     */
-
-    return 0; // placeholder
 }
 
 void
@@ -39,6 +84,11 @@ randomPlayerData (
     Object p_objects[],
     const GUI & p_gui
 ) {
+    std::random_device rdev;
+    std::default_random_engine e(rdev());
+    std::uniform_int_distribution<int> d(0, 21);
+    p_objects[8].spriteID = d(e);
+    p_objects[8].position.x = d(e);
     /*
         -- randomPlayerData   --
         Parameters:
