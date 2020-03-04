@@ -1,3 +1,4 @@
+
 #include <cstdlib>
 #include <ctime>
 #include <string>
@@ -14,18 +15,18 @@ int main (int argc, char *argv[]){
 	GUI gui;
 
 	//Create array of Objects:
-	const int maxObjects{ (gui.numColumns)*(gui.numRows) + 1 };//+1 for player
+	const int maxObjects{ (gui.numColumns)*(gui.numRows)};
 	Object objects[maxObjects];
 
 	//Initialize the game's data source
-	string gameFile ("./assets/Config/game.txt"); //("./Assets/Config/game.txt");
+	string gameFile ("C:/Users/johnb/source/repos/quest_1/quest_1/assets/Config/game.txt");
 
 	//Task 2: Load block structure from a file
     int numObjects = loadBlockData(gameFile, objects, gui);
 
 	//Task 3: Randomize Samus Sprite Appearance
-	numObjects++;
-	objects[0].type = Type::player;  // this is just a placeholder
+	//numObjects++;
+	//objects[0].type = Type::player;  // this is just a placeholder
 	randomPlayerData(numObjects, objects, gui);
 
 	bool quit = false;

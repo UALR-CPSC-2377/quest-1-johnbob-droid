@@ -244,13 +244,12 @@ void GUI::displayGameState(const int numObjects, const Object objects[]){
 
     //Render Blocks
 	for (int i=0; i < numObjects; i++) {
-		if (objects[i].type == Type::player)
-		{
+		if (objects[i].type == Type::player) {
 			//Render Player
 			objectTextures[objects[i].type]->render(renderer, objects[i].position.x, objects[i].position.y, &simonClips[objects[i].spriteID]);
 		}
-		else
-		{
+		else if (objects[i].type == Type::none){}
+        else {
 			//render anything else!
 			objectTextures[objects[i].type]->render(renderer, objects[i].position.x, objects[i].position.y, NULL);
 		}
